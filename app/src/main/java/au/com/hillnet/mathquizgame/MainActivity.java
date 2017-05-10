@@ -16,7 +16,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements QuizSizeDialogPrompt.DialogListener, View.OnSystemUiVisibilityChangeListener {
 
-    MediaPlayer mediaPlayer;
+//    MediaPlayer mediaPlayer;
     private View decorView;
     private ActionBar actionBar;
     private GestureDetectorCompat gestureDetector;
@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
 
         init();
 
-        //Main menu audio
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.menumusic);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+//        //Main menu audio
+//        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.menumusic);
+//        mediaPlayer.setLooping(true);
+//        mediaPlayer.start();
 
         actionBar = getSupportActionBar();
         gestureDetector = new GestureDetectorCompat(this, new GestureHandler());
@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mediaPlayer.stop();
-        mediaPlayer.release();
-
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mediaPlayer.stop();
+//        mediaPlayer.release();
+//
+//    }
 
 
     private void toggleControls() {

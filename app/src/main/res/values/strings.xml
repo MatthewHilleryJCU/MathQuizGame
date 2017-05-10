@@ -35,6 +35,7 @@
     <string name="high_score_text">High Score:</string>
     <string name="btnMenu">Menu</string>
     <string name="highscoreTime">TEST</string>
+    <string name="save_score">Save Score</string>
     <string-array name="lengths">
         <item>10</item>
         <item>15</item>

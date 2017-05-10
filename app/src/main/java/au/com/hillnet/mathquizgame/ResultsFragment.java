@@ -7,7 +7,6 @@ package au.com.hillnet.mathquizgame;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import static android.content.Context.MODE_PRIVATE;
-import static au.com.hillnet.mathquizgame.R.id.time;
 import static au.com.hillnet.mathquizgame.R.id.txtTimeTaken;
 
 public class ResultsFragment extends Fragment {
@@ -47,6 +44,7 @@ public class ResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_results, container, false);
+
 
     }
 

@@ -177,6 +177,19 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
         }
     }
 
+    // Determines if score is sent to highscore
+
+    public void saveHighScore (View view){
+        SharedPreferences sharedPrefs = getSharedPreferences ("saveHighScore", MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString("score", timeFormatted);
+        editor.apply();
+
+        Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
+    }
+
+
     public void onGoMainMenu() {
         finish();
     }

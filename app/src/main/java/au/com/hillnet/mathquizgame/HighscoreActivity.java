@@ -1,6 +1,7 @@
 package au.com.hillnet.mathquizgame;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
@@ -63,7 +64,6 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +79,17 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
         textView = (TextView) findViewById(R.id.text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
 
+        //Display Highscore
+        SharedPreferences sharedPrefs = getSharedPreferences ("saveHighScore", MODE_PRIVATE);
+
+        String score = sharedPrefs.getString("score" , "");
+        String seconds = (" seconds");
+        ((TextView) findViewById(R.id.highscoreTime)).setText(score + seconds);
+
+
     }
+
+
 
 //    Twitter feed
     public void authorise(View view) {
@@ -101,7 +111,7 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
                     Query query = new Query("@twitterapi");
                     QueryResult result;
                     try {
-                        twitter.updateStatus("My highest score is " );
+                        twitter.updateStatus("My highest score is "  );
                         result = twitter.search(query);
                     } catch (final Exception e) {
                         runOnUiThread(new Runnable() {
