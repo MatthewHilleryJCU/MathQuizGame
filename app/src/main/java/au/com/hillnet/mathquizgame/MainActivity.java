@@ -4,19 +4,22 @@ package au.com.hillnet.mathquizgame;
 
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+
 public class MainActivity extends AppCompatActivity implements QuizSizeDialogPrompt.DialogListener, View.OnSystemUiVisibilityChangeListener {
 
-//    MediaPlayer mediaPlayer;
+    //    MediaPlayer mediaPlayer;
     private View decorView;
     private ActionBar actionBar;
     private GestureDetectorCompat gestureDetector;
@@ -57,10 +60,6 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
 
         init();
 
-//        //Main menu audio
-//        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.menumusic);
-//        mediaPlayer.setLooping(true);
-//        mediaPlayer.start();
 
         actionBar = getSupportActionBar();
         gestureDetector = new GestureDetectorCompat(this, new GestureHandler());
@@ -71,22 +70,28 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
 
     }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        mediaPlayer.stop();
-//        mediaPlayer.release();
-//
-//    }
 
-
+    //Enables fullscreen
     private void toggleControls() {
         int flags = decorView.getSystemUiVisibility();
         flags ^= NO_CONTROLS;
         decorView.setSystemUiVisibility(flags);
     }
 
-    private class GestureHandler extends GestureDetector.SimpleOnGestureListener {
+
+    // Inflates the menu; adding items to action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mi = getMenuInflater();
+        mi.inflate(R.menu.menu_main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void settingButtonHandler(MenuItem item) {
+        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+    }
+
+    class GestureHandler extends GestureDetector.SimpleOnGestureListener {
         @Override
         public void onLongPress(MotionEvent e) {
             toggleControls();
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
     public void onBtnStartClick(View view) {
         DialogFragment dialog = new QuizSizeDialogPrompt();
         dialog.show(getFragmentManager(), getString(R.string.tag_qlength));
+
     }
 
 

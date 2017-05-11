@@ -31,6 +31,7 @@ public class QuizSizeDialogPrompt extends DialogFragment {
         }
     }
 
+    //Determines size of quiz
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

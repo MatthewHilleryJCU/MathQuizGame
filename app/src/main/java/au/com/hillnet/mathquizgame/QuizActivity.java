@@ -1,10 +1,8 @@
 package au.com.hillnet.mathquizgame;
-
 /**
- * Created by matt- on 12/04/2017.
+ * Created by matt- on 12/04/2017. B+C=P
  */
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -158,7 +156,7 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
                     timeElapsed = SystemClock.elapsedRealtime() - quizTimer.getBase();
                     quizTimer.stop();
 
-                    timeFormatted = String.format("%d:%d", TimeUnit.MILLISECONDS.toMinutes(timeElapsed),
+                    timeFormatted = String.format("%d.%d", TimeUnit.MILLISECONDS.toMinutes(timeElapsed),
                             TimeUnit.MILLISECONDS.toSeconds(timeElapsed) -
                                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeElapsed))
                     );
@@ -177,7 +175,34 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
         }
     }
 
+
     // Determines if score is sent to highscore
+
+//    public void saveHighScore(View view) {
+//        SharedPreferences sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
+//        String savedHighScore = sharedPrefs.getString("score", "");
+//
+//        float timeInt, savedInt;
+//
+//        timeInt = Float.parseFloat(timeFormatted);
+//        savedInt = Float.parseFloat(savedHighScore);
+//
+//        try {
+//            if (timeInt < savedInt) {
+//                String highScore = Float.toString(timeInt);
+//                sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPrefs.edit();
+//                editor.putString("score", highScore);
+//                editor.apply();
+//
+//                Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
+//            }
+//            else {
+//                Toast.makeText(QuizActivity.this, "To slow for a high score! Noob!", Toast.LENGTH_LONG).show();
+//            }
+//        } catch (Exception e) {
+//        }
+//    }
 
     public void saveHighScore (View view){
         SharedPreferences sharedPrefs = getSharedPreferences ("saveHighScore", MODE_PRIVATE);
@@ -187,6 +212,7 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
         editor.apply();
 
         Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
+
     }
 
 

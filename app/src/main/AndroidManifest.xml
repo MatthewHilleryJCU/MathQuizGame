@@ -9,15 +9,17 @@
         android:icon="@mipmap/ic_app_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".QuizActivity"
             android:configChanges="orientation|screenSize"
@@ -31,10 +33,15 @@
         <activity
             android:name=".HighscoreActivity"
             android:label="HighscoreActivity">
-
         </activity>
 
-        <activity android:name=".Authenticate">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="SettingsActivity">
+        </activity>
+
+        <activity
+            android:name=".Authenticate">
         </activity>
 
     </application>

@@ -36,6 +36,9 @@
     <string name="btnMenu">Menu</string>
     <string name="highscoreTime">TEST</string>
     <string name="save_score">Save Score</string>
+    <string name="toggle_music_off">Toggle Music Off</string>
+    <string name="music_settings">Music Settings</string>
+    <string name="view">view</string>
     <string-array name="lengths">
         <item>10</item>
         <item>15</item>

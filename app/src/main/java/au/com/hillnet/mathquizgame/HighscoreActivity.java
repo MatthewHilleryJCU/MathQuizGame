@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -35,7 +33,6 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
     private static final int AUTHENTICATE = 1;
     TextView textView;
     Twitter twitter = TwitterFactory.getSingleton();
-
 
 
     // Enables full screen
@@ -70,6 +67,7 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
         setContentView(R.layout.activity_highscore);
         back();
 
+        //Enables fullscreen
         actionBar = getSupportActionBar();
         gestureDetector = new GestureDetectorCompat(this, new GestureHandler());
         decorView = getWindow().getDecorView();
@@ -80,18 +78,17 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
         textView.setMovementMethod(new ScrollingMovementMethod());
 
         //Display Highscore
-        SharedPreferences sharedPrefs = getSharedPreferences ("saveHighScore", MODE_PRIVATE);
+        SharedPreferences sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
 
-        String score = sharedPrefs.getString("score" , "");
-        String seconds = (" seconds");
-        ((TextView) findViewById(R.id.highscoreTime)).setText(score + seconds);
+        String score = sharedPrefs.getString("score", "");
+        String time = ("Time: ");
+        ((TextView) findViewById(R.id.highscoreTime)).setText(time + score);
 
 
     }
 
 
-
-//    Twitter feed
+    //    Twitter feed
     public void authorise(View view) {
         Intent intent = new Intent(this, Authenticate.class);
         startActivityForResult(intent, AUTHENTICATE);
@@ -99,6 +96,11 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+
+        SharedPreferences sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
+
+        final String score = sharedPrefs.getString("score", "");
+
         if (requestCode == AUTHENTICATE && resultCode == RESULT_OK) {
             Background.run(new Runnable() {
                 @Override
@@ -111,7 +113,7 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
                     Query query = new Query("@twitterapi");
                     QueryResult result;
                     try {
-                        twitter.updateStatus("My highest score is "  );
+                        twitter.updateStatus("My highest score is " + score + "minutes!");
                         result = twitter.search(query);
                     } catch (final Exception e) {
                         runOnUiThread(new Runnable() {
@@ -142,7 +144,6 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
             });
         }
     }
-
 
 
     public void onBackPressed() {

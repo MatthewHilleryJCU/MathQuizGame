@@ -44,10 +44,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/light_green"
-            android:text="@string/save_score"
             android:onClick="saveHighScore"
+            android:text="@string/save_score"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btnGoMainMenu"
@@ -55,9 +55,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/light_green"
-            android:text="@string/main_menu"
             android:onClick="saveHighScore"
+            android:text="@string/main_menu"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>

@@ -17,8 +17,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:background="@color/white"
-            android:src="@drawable/ic_arrow_back_black_24dp"
-            android:contentDescription="@string/back_arrow" />
+            android:contentDescription="@string/back_arrow"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -40,10 +40,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/timerimage"
             android:padding="5dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_access_time_black_24dp"
-            android:contentDescription="@string/timerimage" />
+            android:src="@drawable/ic_access_time_black_24dp" />
 
         <Chronometer
             android:id="@+id/chronometer"
