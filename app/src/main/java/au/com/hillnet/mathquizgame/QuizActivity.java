@@ -1,7 +1,5 @@
 package au.com.hillnet.mathquizgame;
-/**
- * Created by matt- on 12/04/2017. B+C=P
- */
+
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,7 +36,7 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
         //listView.setDivider(null);
 
         Question q1 = getQuizQuestion(qCount);
-        ArrayList<Question> listQuestions = new ArrayList<Question>();
+        ArrayList<Question> listQuestions = new ArrayList<>();
         listQuestions.add(q1);
 
         QArrayAdapter adapter = new QArrayAdapter(this, listQuestions);
@@ -88,11 +86,12 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
             ListView listView = (ListView) findViewById(R.id.lstView);
             QArrayAdapter adapter = (QArrayAdapter) listView.getAdapter();
             Question item = adapter.getItem(qCount - 1);
+            assert item != null;
             String prevInput = item.getInput();
             item.setInput(prevInput + String.format("%d", input));
             adapter.notifyDataSetChanged();
             listView.smoothScrollToPosition(qCount - 1);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -101,13 +100,14 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
             ListView listView = (ListView) findViewById(R.id.lstView);
             QArrayAdapter adapter = (QArrayAdapter) listView.getAdapter();
             Question item = adapter.getItem(qCount - 1);
+            assert item != null;
             String prevInput = item.getInput();
             if (prevInput.length() != 0) {
                 item.setInput(prevInput.substring(0, (prevInput.length() - 1)));
                 adapter.notifyDataSetChanged();
                 listView.smoothScrollToPosition(qCount - 1);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -116,13 +116,14 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
             ListView listView = (ListView) findViewById(R.id.lstView);
             QArrayAdapter adapter = (QArrayAdapter) listView.getAdapter();
             Question item = adapter.getItem(qCount - 1);
+            assert item != null;
             String prevInput = item.getInput();
             if (prevInput.length() != 0) {
                 item.setInput("");
                 adapter.notifyDataSetChanged();
                 listView.smoothScrollToPosition(qCount - 1);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -131,6 +132,7 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
             ListView listView = (ListView) findViewById(R.id.lstView);
             QArrayAdapter adapter = (QArrayAdapter) listView.getAdapter();
             Question item = adapter.getItem(qCount - 1);
+            assert item != null;
             String strInput = item.getInput();
             if (strInput.length() != 0) {
                 int intInput = Integer.parseInt(strInput);
@@ -171,49 +173,49 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
                     getSupportFragmentManager().beginTransaction().replace(R.id.numpadContainer, resultsFrag).commit();
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
 
-    // Determines if score is sent to highscore
+     //Determines if score is sent to highscore
 
-//    public void saveHighScore(View view) {
-//        SharedPreferences sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
-//        String savedHighScore = sharedPrefs.getString("score", "");
-//
-//        float timeInt, savedInt;
-//
-//        timeInt = Float.parseFloat(timeFormatted);
-//        savedInt = Float.parseFloat(savedHighScore);
-//
-//        try {
-//            if (timeInt < savedInt) {
-//                String highScore = Float.toString(timeInt);
-//                sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPrefs.edit();
-//                editor.putString("score", highScore);
-//                editor.apply();
-//
-//                Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
-//            }
-//            else {
-//                Toast.makeText(QuizActivity.this, "To slow for a high score! Noob!", Toast.LENGTH_LONG).show();
-//            }
-//        } catch (Exception e) {
-//        }
-//    }
+    public void saveHighScore(View view) {
+        SharedPreferences sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
+        String savedHighScore = sharedPrefs.getString("score", "");
 
-    public void saveHighScore (View view){
-        SharedPreferences sharedPrefs = getSharedPreferences ("saveHighScore", MODE_PRIVATE);
+        float timeInt, savedInt;
 
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString("score", timeFormatted);
-        editor.apply();
+        timeInt = Float.parseFloat(timeFormatted);
+        savedInt = Float.parseFloat(savedHighScore);
 
-        Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
+        try {
+            if (timeInt < savedInt) {
+                String highScore = Float.toString(timeInt);
+                sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("score", highScore);
+                editor.apply();
 
+                Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(QuizActivity.this, "To slow for a high score! Noob!", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception ignored) {
+        }
     }
+
+//    public void saveHighScore (View view){
+//        SharedPreferences sharedPrefs = getSharedPreferences ("saveHighScore", MODE_PRIVATE);
+//
+//        SharedPreferences.Editor editor = sharedPrefs.edit();
+//        editor.putString("score", timeFormatted);
+//        editor.apply();
+//
+//        Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
+//
+//    }
 
 
     public void onGoMainMenu() {
@@ -248,7 +250,7 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
                 break;
             case 3: //÷
                 oper = '÷';
-                ArrayList<Integer> factors = new ArrayList<Integer>();
+                ArrayList<Integer> factors = new ArrayList<>();
                 do {
                     num1 = rand.nextInt(97) + 4;
                     int limit = num1;
@@ -266,7 +268,6 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
                 ans = num1 / num2;
                 break;
         }
-        Question q = new Question(num1, num2, oper, ans, count);
-        return q;
+        return new Question(num1, num2, oper, ans, count);
     }
 }

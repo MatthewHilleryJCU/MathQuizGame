@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -113,8 +114,11 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
                     Query query = new Query("@twitterapi");
                     QueryResult result;
                     try {
-                        twitter.updateStatus("My highest score is " + score + "minutes!");
+                        twitter.updateStatus("My highest score is " + score + " minutes!");
                         result = twitter.search(query);
+
+                        Toast.makeText(HighscoreActivity.this, "Successfully shared score!", Toast.LENGTH_LONG).show();
+
                     } catch (final Exception e) {
                         runOnUiThread(new Runnable() {
                             @Override

@@ -1,8 +1,5 @@
 package au.com.hillnet.mathquizgame;
 
-/**
- * Created by matt- on 18/04/2017.
- */
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,8 +10,8 @@ import android.os.Bundle;
 
 public class QuizSizeDialogPrompt extends DialogFragment {
 
-    public interface DialogListener {
-        public void onGoClick(int choice);
+    interface DialogListener {
+        void onGoClick(int choice);
     }
 
     DialogListener listener;

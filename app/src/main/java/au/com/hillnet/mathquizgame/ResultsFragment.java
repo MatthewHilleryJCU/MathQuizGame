@@ -1,9 +1,5 @@
 package au.com.hillnet.mathquizgame;
 
-/**
- * Created by matt- on 12/04/2017.
- */
-
 
 import android.app.Activity;
 import android.content.Context;
@@ -63,6 +59,7 @@ public class ResultsFragment extends Fragment {
         int accr_int = (int) accr;
 
         View v = getView();
+        assert v != null;
         TextView tvScore = (TextView) v.findViewById(R.id.txtScore);
         tvScore.setText(String.format("Score: %d/%d", score, qlength));
         TextView tvAccr = (TextView) v.findViewById(R.id.txtAccuracy);

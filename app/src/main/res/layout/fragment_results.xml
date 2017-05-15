@@ -38,6 +38,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
+
         <Button
             android:id="@+id/saveToHighScore"
             android:layout_width="0dp"
@@ -49,6 +50,7 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
+
         <Button
             android:id="@+id/btnGoMainMenu"
             android:layout_width="0dp"
@@ -58,6 +60,8 @@
             android:onClick="saveHighScore"
             android:text="@string/main_menu"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
+
+
     </LinearLayout>
 </LinearLayout>

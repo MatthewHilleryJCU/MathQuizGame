@@ -1,11 +1,8 @@
 package au.com.hillnet.mathquizgame;
 
-/**
- * Created by matt- on 12/04/2017.
- */
-
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +13,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class QArrayAdapter extends ArrayAdapter<Question> {
+class QArrayAdapter extends ArrayAdapter<Question> {
 
-    public QArrayAdapter(Context context, ArrayList<Question> questions) {
+    QArrayAdapter(Context context, ArrayList<Question> questions) {
         super(context, 0, questions);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         Question q = getItem(position);
 
         if (convertView == null) {
@@ -31,6 +29,7 @@ public class QArrayAdapter extends ArrayAdapter<Question> {
         }
 
         TextView txtQuestion = (TextView) convertView.findViewById(R.id.txtQuestion);
+        assert q != null;
         txtQuestion.setText(q.getLine());
         TextView txtInput = (TextView) convertView.findViewById(R.id.txtInput);
         txtInput.setText(q.getInput());

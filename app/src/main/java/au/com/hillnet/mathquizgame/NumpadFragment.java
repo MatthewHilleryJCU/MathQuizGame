@@ -1,9 +1,5 @@
 package au.com.hillnet.mathquizgame;
 
-/**
- * Created by matt- on 12/04/2017.
- */
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +11,7 @@ import android.widget.Button;
 
 public class NumpadFragment extends Fragment {
 
-    public interface NumpadListener {
+    interface NumpadListener {
         void onNumClick(int input);
 
         void onDelClick();

@@ -70,6 +70,14 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Starts background music
+        startService(new Intent(this, MusicPlayer.class));
+    }
+
 
     //Enables fullscreen
     private void toggleControls() {
@@ -91,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
     }
 
-    class GestureHandler extends GestureDetector.SimpleOnGestureListener {
+    private class GestureHandler extends GestureDetector.SimpleOnGestureListener {
         @Override
         public void onLongPress(MotionEvent e) {
             toggleControls();
