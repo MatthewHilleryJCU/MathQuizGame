@@ -178,7 +178,7 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
     }
 
 
-     //Determines if score is sent to highscore
+    //Determines if score is sent to highscore
 
     public void saveHighScore(View view) {
         SharedPreferences sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
@@ -187,7 +187,14 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
         float timeInt, savedInt;
 
         timeInt = Float.parseFloat(timeFormatted);
-        savedInt = Float.parseFloat(savedHighScore);
+
+        try {
+            savedInt = Float.parseFloat(savedHighScore);
+        } catch (NumberFormatException ex) {
+            savedInt = (float) 9.0; // Default value
+
+        }
+
 
         try {
             if (timeInt < savedInt) {
@@ -198,8 +205,7 @@ public class QuizActivity extends FragmentActivity implements NumpadFragment.Num
                 editor.apply();
 
                 Toast.makeText(this, "Score saved to high score!", Toast.LENGTH_LONG).show();
-            }
-            else {
+            } else {
                 Toast.makeText(QuizActivity.this, "To slow for a high score! Noob!", Toast.LENGTH_LONG).show();
             }
         } catch (Exception ignored) {

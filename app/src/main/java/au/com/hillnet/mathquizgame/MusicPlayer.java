@@ -44,6 +44,6 @@ public class MusicPlayer extends Service {
             player.stop();
             player.release();
         }
-        SettingsActivity.bkgdchecked = 0;
+        SettingsActivity.bkgdchecked = 0; //
     }
 }

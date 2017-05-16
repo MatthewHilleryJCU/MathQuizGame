@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 /**
  * Created by matt- on 11/05/2017. ;)
@@ -24,9 +25,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnSystem
     private GestureDetectorCompat gestureDetector;
     public Button backMenuClick1;
     CheckBox checkbox1;
-    private SharedPreferences prefs;
-    int bkgdcheckedPlaceHolder;
     public static int bkgdchecked = 0;
+    int checkedPasser, bkgdcheckedHandler;
+    SharedPreferences prefs;
 
 
     // Enables full screen
@@ -55,53 +56,71 @@ public class SettingsActivity extends AppCompatActivity implements View.OnSystem
 
     }
 
-    private void bkgdMusicOff() {
-        checkbox1 = (CheckBox) findViewById(R.id.gameMusicCheck);
-        checkbox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    // The check box is checked
-                    bkgdchecked = 1;
-                } else {
-                    bkgdchecked = 0;
-                }
-            }
-        });
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
 
         prefs = getSharedPreferences("musicPositionPref", MODE_PRIVATE);
-        prefs = getSharedPreferences("btnPositionPrefs", MODE_PRIVATE);
 
-        bkgdMusicOff();
+        checkbox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (buttonView.isChecked()) {
+                    checkbox1.setChecked(true);
+                    // The check box is checked
+                    bkgdchecked = 1;
+                    checkedPasser = bkgdchecked;
+                    SharedPreferences prefs = getSharedPreferences("musicPositionPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("musicPosition", checkedPasser);
+                    editor.apply();
+                } else {
+                    checkbox1.setChecked(false);
+                    // The check box is unchecked
+                    bkgdchecked = 0;
+                    checkedPasser = bkgdchecked;
+                    SharedPreferences prefs = getSharedPreferences("musicPositionPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("musicPosition", checkedPasser);
+                    editor.apply();
+                }
+            }
+        });
+
+
         musicPositionHandler();
-
     }
 
+    // Background music
     private void musicPositionHandler() {
         prefs = getSharedPreferences("musicPositionPref", MODE_PRIVATE);
-        bkgdcheckedPlaceHolder = prefs.getInt("musicPosition", 0);
+        checkedPasser = prefs.getInt("musicPosition", 0);
 
-        if (bkgdchecked == bkgdcheckedPlaceHolder) {
+        // if 0 == 0 music is on
+        if (checkedPasser == 0) {
             checkbox1.setChecked(false);
-            bkgdchecked = 0;
-            bkgdcheckedPlaceHolder = bkgdchecked;
-            SharedPreferences prefs = getSharedPreferences("musicPositionPref", MODE_PRIVATE);
+            bkgdcheckedHandler = 0;
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt("musicPosition", bkgdcheckedPlaceHolder);
+            editor.putInt("setMusicPosition", bkgdcheckedHandler);
             editor.apply();
-        } else {
+
+            // else if 1 == 1 music is off
+        } else if (checkedPasser == 1) {
             checkbox1.setChecked(true);
-            bkgdchecked = 1;
-            bkgdcheckedPlaceHolder = bkgdchecked;
-            SharedPreferences prefs = getSharedPreferences("musicPositionPref", MODE_PRIVATE);
+            bkgdcheckedHandler = 1;
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt("musicPosition", bkgdcheckedPlaceHolder);
+            editor.putInt("setMusicPosition", bkgdcheckedHandler);
             editor.apply();
+
+
+        } else {
+            checkbox1.setChecked(false);
+            bkgdcheckedHandler = 0;
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("setMusicPosition", bkgdcheckedHandler);
+            editor.apply();
+            Toast.makeText(this, "bkgdchecked failed return music: playing.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -117,6 +136,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnSystem
         decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(FULLSCREEN);
         decorView.setOnSystemUiVisibilityChangeListener(this);
+        checkbox1 = (CheckBox) findViewById(R.id.gameMusicCheck);
 
     }
 
@@ -163,18 +183,21 @@ public class SettingsActivity extends AppCompatActivity implements View.OnSystem
 
     public void onPause() {
         super.onPause();
+
+        // Stops played when on exit
         stopService(new Intent(this, MusicPlayer.class));
 
         if (bkgdchecked == 0) {
+
             // save state as on (0)
-            checkbox1.setChecked(false);
             bkgdchecked = 0;
 
         } else {
+
             // save state as off (1)
-            checkbox1.setChecked(true);
             bkgdchecked = 1;
-            bkgdcheckedPlaceHolder = bkgdchecked;
         }
     }
+
+
 }

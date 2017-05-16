@@ -82,8 +82,8 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnSyste
         SharedPreferences sharedPrefs = getSharedPreferences("saveHighScore", MODE_PRIVATE);
 
         String score = sharedPrefs.getString("score", "");
-        String time = ("Time: ");
-        ((TextView) findViewById(R.id.highscoreTime)).setText(time + score);
+        String time = (" Minutes");
+        ((TextView) findViewById(R.id.highscoreTime)).setText(score + time);
 
 
     }

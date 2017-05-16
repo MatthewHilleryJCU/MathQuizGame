@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.1" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="au.com.hillnet.mathquizgame">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_app_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="false">
 
 
         <activity
@@ -32,17 +33,15 @@
 
         <activity
             android:name=".HighscoreActivity"
-            android:label="HighscoreActivity">
-        </activity>
+            android:label="HighscoreActivity"/>
 
         <activity
             android:name=".SettingsActivity"
-            android:label="SettingsActivity">
-        </activity>
+            android:label="SettingsActivity"/>
 
-        <activity
-            android:name=".Authenticate">
-        </activity>
+        <activity android:name=".Authenticate"/>
+
+        <service android:name=".MusicPlayer" />
 
     </application>
 

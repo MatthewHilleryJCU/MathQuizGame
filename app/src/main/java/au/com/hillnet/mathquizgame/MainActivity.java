@@ -4,6 +4,7 @@ package au.com.hillnet.mathquizgame;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
@@ -23,8 +24,9 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
     private View decorView;
     private ActionBar actionBar;
     private GestureDetectorCompat gestureDetector;
-
     public Button onBtnScoreClick;
+    int checkedPasser;
+    SharedPreferences prefs;
 
     // Enables full screen
     private static final int NO_CONTROLS =
@@ -71,11 +73,19 @@ public class MainActivity extends AppCompatActivity implements QuizSizeDialogPro
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
-        // Starts background music
-        startService(new Intent(this, MusicPlayer.class));
+        // Starts background music for game
+        prefs = getSharedPreferences("musicPositionPref", MODE_PRIVATE);
+        checkedPasser = prefs.getInt("musicPosition", 0);
+
+        if (checkedPasser == 0) {
+            startService(new Intent(this, MusicPlayer.class));
+        } else {
+            stopService(new Intent(this, MusicPlayer.class));
+        }
+
     }
 
 
